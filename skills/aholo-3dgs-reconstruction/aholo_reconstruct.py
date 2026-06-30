@@ -5,7 +5,7 @@
 Aholo 3D Reconstruction Skill (OpenAPI v1)
 
 流程（Aholo 开放平台，网关 https://api.aholo3d.cn，路径以 @RestApi#openApiUrl 为准）：
-1) 获取上传凭证：GET /world/v1/asset/token（成功直出凭证对象）
+1) 获取上传凭证：GET /asset/v1/token（成功直出凭证对象）
 2) 本地文件上传到 OUS globalDomain（仍为 OUS V2 的 c/m/d 封装）
 3) 创建重建/生成：POST `/world/v1/reconstructions` 或 `/world/v1/generations`（成功时为 JSON 对象 `WorldAsyncOperation`，字段 `worldId`；网关/旧版偶发裸文本时脚本仍兼容）
 4) 查询/轮询：GET /world/v1/{worldId}（成功直出世界详情对象）

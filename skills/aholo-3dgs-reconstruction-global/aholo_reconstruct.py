@@ -5,7 +5,7 @@
 Aholo 3D Reconstruction Skill — International (OpenAPI v1, global gateway)
 
 Flow (Aholo Open Platform global site, gateway https://api.aholo3d.com, world APIs under /global prefix):
-1) GET /global/world/v1/asset/token
+1) GET /global/asset/v1/token
 2) OUS direct / multipart upload (/ous/api/* has no /global prefix; globalDomain often https://ous-sg.kujiale.com)
 3) POST /global/world/v1/reconstructions or /global/world/v1/generations
 4) GET /global/world/v1/{worldId}

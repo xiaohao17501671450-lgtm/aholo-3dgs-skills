@@ -22,7 +22,7 @@ description: "Aholo OpenAPI v1 global 3D tasks (reconstruction/generation): uplo
 | Env | `AHOLO_API_KEY` — [api-keys](https://labs.aholo3d.com/api-keys) |
 | Auth | `Authorization: <API Key>`, no `Bearer` |
 | Create header | `x-source: skills` → platform `OPEN_API_SKILL` |
-| Gateway | `https://api.aholo3d.com`; paths `/global/world/v1/*` |
+| Gateway | `https://api.aholo3d.com`; upload token `GET /global/asset/v1/token`; world tasks `/global/world/v1/*` |
 | Viewer | `https://studio.aholo3d.com/3dgs-model/{worldId}` |
 | Actions | `create` / `create-reconstruction` / `create-generation` / `status` / `poll` / `list` |
 | Create success | `WorldAsyncOperation` contains `worldId` only |
@@ -171,7 +171,7 @@ When the user is on **Windows**, the agent must follow these rules:
 
 ## 7. Appendix
 
-**API paths:** `GET /global/world/v1/asset/token` · `POST /global/world/v1/reconstructions` · `POST /global/world/v1/generations` · `GET /global/world/v1/{worldId}` · `POST /global/world/v1/list` · OUS upload uses domain from token response (no `/global` prefix on OUS)
+**API paths:** `GET /global/asset/v1/token` · `POST /global/world/v1/reconstructions` · `POST /global/world/v1/generations` · `GET /global/world/v1/{worldId}` · `POST /global/world/v1/list` · OUS upload uses domain from token response (no `/global` prefix on OUS)
 
 **Terminal states:** `SUCCEEDED` · `FAILED` · `CANCELED` · `TIMEOUT` · `REJECTED`
 

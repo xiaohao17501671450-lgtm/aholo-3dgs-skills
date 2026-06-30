@@ -22,7 +22,7 @@ description: "仅用于 Aholo OpenAPI v1 的 3D 任务（reconstruction/generati
 | 环境变量 | `AHOLO_API_KEY`（[api-keys](https://labs.aholo3d.cn/api-keys)） |
 | 鉴权 | `Authorization: <API key>`，无 `Bearer` |
 | 创建请求头 | `x-source: skills` → 平台 `OPEN_API_SKILL` |
-| 网关 | `https://api.aholo3d.cn`；路径 `/world/v1/*` |
+| 网关 | `https://api.aholo3d.cn`；上传凭证 `GET /asset/v1/token`；世界任务 `/world/v1/*` |
 | 查看链接 | `https://studio.aholo3d.cn/3dgs-model/{worldId}` |
 | 脚本动作 | `create` / `create-reconstruction` / `create-generation` / `status` / `poll` / `list` |
 | 创建成功 | `WorldAsyncOperation` 仅含 `worldId` |
@@ -171,7 +171,7 @@ python -u .cursor/skills/aholo-3dgs-reconstruction/aholo_reconstruct.py '{"actio
 
 ## 7. 附录
 
-**OpenAPI 路径：** `GET /world/v1/asset/token` · `POST /world/v1/reconstructions` · `POST /world/v1/generations` · `GET /world/v1/{worldId}` · `POST /world/v1/list`
+**OpenAPI 路径：** `GET /asset/v1/token` · `POST /world/v1/reconstructions` · `POST /world/v1/generations` · `GET /world/v1/{worldId}` · `POST /world/v1/list`
 
 **终态：** `SUCCEEDED` · `FAILED` · `CANCELED` · `TIMEOUT` · `REJECTED`
 
