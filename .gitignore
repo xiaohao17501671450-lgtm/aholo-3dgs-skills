@@ -5,3 +5,13 @@ __pycache__/
 venv/
 .DS_Store
 Thumbs.db
+
+# Local Cursor project skills (canonical source is skills/)
+.cursor/
+
+# Local debug payloads for aholo_reconstruct.py
+_aholo_*.json
+
+# Legacy duplicate skill folders at repo root (use skills/ instead)
+/aholo-3dgs-reconstruction/
+/aholo-3dgs-recon-global/

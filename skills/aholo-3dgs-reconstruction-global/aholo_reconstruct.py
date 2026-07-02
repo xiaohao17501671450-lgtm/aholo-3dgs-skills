@@ -171,17 +171,13 @@ class AholoClient:
 
     def __init__(self, api_key: str):
         self.api_key = api_key
-        skip_verify = str(os.environ.get("AHOLO_INSECURE_SKIP_VERIFY", "")).strip().lower()
-        force_verify = str(os.environ.get("AHOLO_FORCE_SSL_VERIFY", "")).strip().lower()
-        if force_verify in {"1", "true", "yes", "on"}:
-            self.verify_ssl = True
-        elif skip_verify in {"0", "false", "no", "off"}:
-            self.verify_ssl = True
-        else:
-            # Skip TLS verification by default (corporate/self-signed certs).
+        insecure_skip = str(os.environ.get("AHOLO_INSECURE_SKIP_VERIFY", "")).strip().lower()
+        if insecure_skip in {"1", "true", "yes", "on"}:
+            # Explicit opt-out only (e.g. corporate self-signed certs).
             self.verify_ssl = False
-        if not self.verify_ssl:
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        else:
+            self.verify_ssl = True
         self.ous_token: Optional[str] = None
         self.global_domain: Optional[str] = None
         self.block_size: int = 1024 * 1024

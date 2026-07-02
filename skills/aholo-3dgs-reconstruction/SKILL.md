@@ -32,9 +32,9 @@ description: "仅用于 Aholo OpenAPI v1 的 3D 任务（reconstruction/generati
 
 ### 证书校验（TLS，脚本默认行为）
 
-- 脚本**默认关闭** SSL 证书校验，避免公司网络/本机自签证书导致 `CERTIFICATE_VERIFY_FAILED`。
-- 强制开启：环境变量 `AHOLO_FORCE_SSL_VERIFY=1`（或 `true` / `yes` / `on`）。
-- 兼容变量 `AHOLO_INSECURE_SKIP_VERIFY`：仅当显式设为 `0` / `false` / `no` / `off` 时才开启校验；未设置或其它值时仍按默认绕过。
+- 脚本**默认开启** SSL 证书校验（安全默认）。
+- 内网自签证书等场景：设置 `AHOLO_INSECURE_SKIP_VERIFY=1`（或 `true` / `yes` / `on`）可显式关闭校验；更推荐用 `REQUESTS_CA_BUNDLE` 指定企业 CA 证书。
+- 遇 `CERTIFICATE_VERIFY_FAILED` 时，优先配置 CA 证书；仅在确认网络环境安全时再使用 `AHOLO_INSECURE_SKIP_VERIFY`。
 
 ### 响应与排错
 
@@ -181,7 +181,8 @@ python -u .cursor/skills/aholo-3dgs-reconstruction/aholo_reconstruct.py '{"actio
 
 ```powershell
 $env:AHOLO_API_KEY="your_api_key"
-# 可选：$env:AHOLO_FORCE_SSL_VERIFY="1"
+# 内网自签证书场景（不推荐）：$env:AHOLO_INSECURE_SKIP_VERIFY="1"
+# 或指定 CA：$env:REQUESTS_CA_BUNDLE="D:/certs/corp-ca.pem"
 ```
 
 仍建议由 Agent 代跑脚本；用户配置 Key 后回复「继续」即可。

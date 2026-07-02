@@ -32,9 +32,9 @@ description: "Aholo OpenAPI v1 global 3D tasks (reconstruction/generation): uplo
 
 ### TLS (script default behavior)
 
-- Script **disables** SSL verification by default to avoid `CERTIFICATE_VERIFY_FAILED` on corporate/self-signed networks.
-- Force enable: set `AHOLO_FORCE_SSL_VERIFY=1` (or `true` / `yes` / `on`).
-- Compat var `AHOLO_INSECURE_SKIP_VERIFY`: verification is enabled only when explicitly set to `0` / `false` / `no` / `off`; any other value or unset keeps default bypass.
+- Script **enables** SSL verification by default (secure by default).
+- Corporate/self-signed certs: set `AHOLO_INSECURE_SKIP_VERIFY=1` (or `true` / `yes` / `on`) to explicitly disable verification; prefer `REQUESTS_CA_BUNDLE` to point at your enterprise CA.
+- On `CERTIFICATE_VERIFY_FAILED`, configure CA certs first; use `AHOLO_INSECURE_SKIP_VERIFY` only when you accept the risk.
 
 ### Responses & errors
 
@@ -181,7 +181,8 @@ When the user is on **Windows**, the agent must follow these rules:
 
 ```powershell
 $env:AHOLO_API_KEY="your_api_key"
-# Optional: $env:AHOLO_FORCE_SSL_VERIFY="1"
+# Self-signed certs (not recommended): $env:AHOLO_INSECURE_SKIP_VERIFY="1"
+# Or set CA bundle: $env:REQUESTS_CA_BUNDLE="D:/certs/corp-ca.pem"
 ```
 
 Agent-run is preferred; user sets the key and replies **continue**.

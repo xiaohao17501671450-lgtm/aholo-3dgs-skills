@@ -167,17 +167,13 @@ class AholoClient:
 
     def __init__(self, api_key: str):
         self.api_key = api_key
-        skip_verify = str(os.environ.get("AHOLO_INSECURE_SKIP_VERIFY", "")).strip().lower()
-        force_verify = str(os.environ.get("AHOLO_FORCE_SSL_VERIFY", "")).strip().lower()
-        if force_verify in {"1", "true", "yes", "on"}:
-            self.verify_ssl = True
-        elif skip_verify in {"0", "false", "no", "off"}:
-            self.verify_ssl = True
-        else:
-            # 默认自动绕过证书校验，避免公司/本机自签证书导致调用失败。
+        insecure_skip = str(os.environ.get("AHOLO_INSECURE_SKIP_VERIFY", "")).strip().lower()
+        if insecure_skip in {"1", "true", "yes", "on"}:
+            # 仅在内网自签证书等场景下，由用户显式关闭 TLS 校验。
             self.verify_ssl = False
-        if not self.verify_ssl:
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        else:
+            self.verify_ssl = True
         self.ous_token: Optional[str] = None
         self.global_domain: Optional[str] = None
         self.block_size: int = 1024 * 1024
