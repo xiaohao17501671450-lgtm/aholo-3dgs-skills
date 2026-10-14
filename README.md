@@ -5,7 +5,7 @@ Cursor agent skills for Aholo OpenAPI v1 3D tasks (reconstruction / generation):
 | Skill | Region | Gateway | API keys |
 |-------|--------|---------|----------|
 | `aholo-3dgs-reconstruction` | China | `api.aholo3d.cn` | [labs.aholo3d.cn](https://labs.aholo3d.cn/api-keys) |
-| `aholo-3dgs-reconstruction-global` | Global | `api.aholo3d.com` | [labs.aholo3d.com](https://labs.aholo3d.com/api-keys) |
+| `aholo-3dgs-reconstruction-global` | Global | `api.aholo.ai` | [labs.aholo.ai](https://labs.aholo.ai/api-keys) |
 
 Install **one** skill for your region (or both if you use both platforms). Set `AHOLO_API_KEY` in your environment before use.
 
